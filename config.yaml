@@ -1,0 +1,56 @@
+global:
+  save_root: './checkpoints'
+  exp_name: 'mp-2023'
+
+
+dataset:
+  data_root: 'data/public'
+  num_rays_per_img: 512
+  
+
+optimizer:
+  lr: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+
+
+train:
+  epochs: 10005
+  batch_size: 2
+  workers: 4
+  save_every: 500
+  log_every: 100
+
+
+sampling:
+  num_pts_per_ray_c: 128
+  num_pts_per_ray_f: 256
+  near: 1.0
+  far: 3.0
+  hierarchical: True
+
+
+network:
+  network_type: "updated_skeleton2" # "skeleton" or "updated_skeleton" or "double_mlp"
+  out_dim: 3
+  num_layers: 8
+  sigma_out_layer : 7
+  hidden_dim: 256
+  activation: 'lrelu'
+  skip: [4]
+  num_freq: 10
+  max_freq: 6
+
+
+validation:
+  valid_every: 500
+  mip: 2
+  sigma_thres: 50.0
+  chunk_size: 512  #10240
+  num_pts_per_ray_render: 128
+  save_img: False
+
+
+wandb:
+  wandb: False
+  wandb_name: 'mp_test'
